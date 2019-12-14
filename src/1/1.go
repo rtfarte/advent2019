@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"log"
-	"math"
 	"os"
 	"strconv"
 )
@@ -16,11 +15,11 @@ func main() {
 	}
 	defer file.Close()
 
-	sum := 0.0
+	sum := uint32(0)
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		f, _ := strconv.ParseFloat(scanner.Text(), 64)
-		sum = sum + math.Floor((f/3)-2)
+		f, _ := strconv.ParseUint(scanner.Text(), 10, 64)
+		sum = sum + (uint32(f) / 3) - 2
 	}
 
 	if err := scanner.Err(); err != nil {
