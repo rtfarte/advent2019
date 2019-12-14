@@ -15,11 +15,11 @@ func main() {
 	}
 	defer file.Close()
 
-	sum := uint32(0)
+	sum := 0
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		f, _ := strconv.ParseUint(scanner.Text(), 10, 64)
-		sum = sum + (uint32(f) / 3) - 2
+		f, _ := strconv.ParseInt(scanner.Text(), 10, 64)
+		sum = sum + (int(f) / 3) - 2
 	}
 
 	if err := scanner.Err(); err != nil {
