@@ -1,30 +1,31 @@
-package main
+package utils
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
 )
 
-func main() {
-	file, err := os.Open("input.txt")
+func Read() ([]int, error) {
+	file, err := os.Open("../inputs/modules.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
-	sum := 0
+	a := make([]int, 100)
 	scanner := bufio.NewScanner(file)
+	i := 0
 	for scanner.Scan() {
 		f, _ := strconv.ParseInt(scanner.Text(), 10, 64)
-		sum = sum + (int(f) / 3) - 2
+		a[i] = int(f)
+		i++
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		return a, err
 	}
 
-	fmt.Println(sum)
+	return a, nil
 }
